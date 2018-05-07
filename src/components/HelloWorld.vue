@@ -1,19 +1,31 @@
 <template>
   <div class="hello">
-    <h1>{{ msgs }}</h1>
+    <h2>{{ msg }}</h2>
+    <h2>{{ say }}</h2>
+    <h1>个人简介</h1>
+    <h2>name: {{ user.name }}</h2>
+    <h2>age: {{ user.age }}</h2>
+    <h2>school: {{ user.school }}</h2>
   </div>
 </template>
 
 <script>
+/* 一个页面指定导入一个默认module */
 export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      msgs: 'Welcome to Vue.js'
+      msg: 'Welcome to Vue.js',
+      say: 'Vue 学习',
+      user: {
+        'name': '老王',
+        'age': 49,
+        'school': 'Tsinghua University'
+      }
     }
   }
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
