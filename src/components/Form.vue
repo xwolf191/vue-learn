@@ -1,4 +1,4 @@
-<template lang="html" xmlns:v-validate="http://www.w3.org/1999/xhtml">
+<template lang="html">
   <div id="ap">
  <form >
    <table>
