@@ -36,3 +36,8 @@ Vue.component('button-counter', {
   },
   template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
 })
+
+Vue.component('hb', {
+  props: ['title', 'id'],
+  template: '<span >{{ title }} - {{id}}</span>'
+})
