@@ -1,4 +1,4 @@
-<template>
+<template lang="html">
   <div class="hello">
     <h2>{{ msg }}</h2>
     <h2>{{ say }}</h2>

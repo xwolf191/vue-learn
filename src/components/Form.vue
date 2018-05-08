@@ -1,10 +1,10 @@
-<template>
+<template lang="html" xmlns:v-validate="http://www.w3.org/1999/xhtml">
   <div id="ap">
- <form>
+ <form >
    <table>
      <tr>
        <td><p>用户名</p></td>
-       <td> <input v-model="message" maxlength="10" /> <label>{{message}}</label></td>
+       <td> <input name="username" v-model="formData.username" maxlength="10" /> <label>{{formData.username}}</label></td>
      </tr>
 
      <tr>
@@ -12,7 +12,7 @@
        <p>密码</p>
      </td>
      <td>
-       <input type="password"  maxlength="30" />
+       <input v-model="formData.password" type="password"  maxlength="30" />
      </td>
      </tr>
 
@@ -21,8 +21,8 @@
        <p>性别</p>
      </td>
      <td>
-       <input id="sex_man" name="sex" type="radio"  value="0"  v-model="sex" /> <label for="sex_man">男</label>
-       <input id="sex_woman" name="sex" type="radio"  value="1"  v-model="sex" /> <label for="sex_woman">女</label>
+       <input id="sex_man" name="sex" type="radio"  value="0"  v-model="formData.sex" /> <label for="sex_man">男</label>
+       <input id="sex_woman" name="sex" type="radio"  value="1"  v-model="formData.sex" /> <label for="sex_woman">女</label>
      </td>
      </tr>
 
@@ -31,11 +31,11 @@
          <p>喜爱的搜索引擎：</p>
        </td>
        <td>
-         <input type="checkbox" id="love_Google" value="0" >
+         <input v-model="formData.love" type="checkbox" id="love_Google" value="0" >
          <label for="love_Google">谷歌</label>
-         <input type="checkbox" id="love_Baidu" value="1">
+         <input v-model="formData.love" type="checkbox" id="love_Baidu" value="1">
          <label for="love_Baidu">百度</label>
-         <input type="checkbox" id="love_taobao" value="2">
+         <input v-model="formData.love" type="checkbox" id="love_taobao" value="2">
          <label for="love_taobao">淘宝</label>
        </td>
      </tr>
@@ -45,10 +45,10 @@
          <p>喜欢的美女：</p>
        </td>
        <td>
-        <select  id="girl" v-model="selected" >
-          <option v-for="gr in girls" v-bind:value="gr.id">{{gr.title}}</option>
+        <select  id="girl" v-model="formData.girl" >
+          <option v-for="gr in girls" v-bind:key="gr.id" v-bind:value="gr.id">{{gr.title}}</option>
         </select>
-         {{selected}}
+         {{formData.girl}}
        </td>
      </tr>
 
@@ -57,23 +57,34 @@
          <p>头像：</p>
        </td>
        <td>
-        <input type="file"  @change="getFile($event)" /> <button @click="upload">上传</button>
+        <input  type="file" />
        </td>
      </tr>
 
+     <tr>
+       <td>
+         <p>介绍：</p>
+       </td>
+       <td>
+         <textarea  v-model="formData.desc" placeholder="个人简介">
+         </textarea>
+       </td>
+     </tr>
+
+     <tr>
+       <button id="sub_button" @click.prevent="subForm($event)">提交</button>
+     </tr>
    </table>
  </form>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 export default {
-  name: 'HelloWorld',
-  data () {
+  name: 'Hello',
+  data: function () {
     return {
-      message: '',
-      sex: 1,
-      selected: '2',
       girls: [
         {
           'id': 1,
@@ -94,10 +105,30 @@ export default {
       selectVal: function (data) {
         console.info(data.title)
       },
-      getFile: function (even) {
-        this.upath = event.target.files[0]
+      imgData: {
+        accept: 'image/gif, image/jpeg, image/png, image/jpg'
       },
-      upload: function () {
+      formData: {
+        username: '',
+        password: '',
+        love: [],
+        sex: '',
+        girl: '',
+        desc: ''
+      },
+      subForm: function () {
+        // 构造表单数据json
+        var data = JSON.stringify(this.formData)
+        console.info(data)
+        Vue.http.post('http://localhost:8080/user/save', data, {
+          headers: {
+            'Token': 'AiYaCeshiToken'
+          }
+        }).then(function (success) {
+          console.info(success)
+        }, function (error) {
+          console.info(error)
+        })
       }
     }
   }
