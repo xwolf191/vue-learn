@@ -120,7 +120,7 @@ export default {
         // 构造表单数据json
         var data = JSON.stringify(this.formData)
         console.info(data)
-        Vue.http.post('http://localhost:8080/user/save', data, {
+        Vue.http.post('http://localhost:8080/user/save', this.formData, {
           headers: {
             'Token': 'AiYaCeshiToken'
           }
