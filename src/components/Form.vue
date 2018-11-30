@@ -17,6 +17,25 @@
      </tr>
 
      <tr>
+       <td>
+         <p>身份证号</p>
+       </td>
+       <td>
+         <!--失去焦点触发函数-->
+         <input v-model="formData.cardNo" type="text"  maxlength="18" @blur="setAge" />
+       </td>
+     </tr>
+
+     <tr>
+       <td>
+         <p>年龄</p>
+       </td>
+       <td>
+         <input disabled v-model="formData.age" type="text"  maxlength="4" />
+       </td>
+     </tr>
+
+     <tr>
      <td>
        <p>性别</p>
      </td>
@@ -110,6 +129,8 @@ export default {
       },
       formData: {
         username: '',
+        cardNo: '',
+        age: '',
         password: '',
         love: [],
         sex: '',
@@ -130,6 +151,13 @@ export default {
           console.info(error)
         })
       }
+    }
+  },
+  methods: {
+    setAge: function () {
+      var year = new Date().getFullYear()
+      var target = this.formData.cardNo.substring(6, 10)
+      this.formData.age = year - target
     }
   }
 }

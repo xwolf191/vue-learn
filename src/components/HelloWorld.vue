@@ -6,6 +6,8 @@
     <h2>name: {{ user.name }}</h2>
     <h2>age: {{ user.age }}</h2>
     <h2>school: {{ user.school }}</h2>
+    <!--过滤器，格式转换,注意filters的层级结构-->
+    <h2>当前时间：{{now | formatDate}}</h2>
   </div>
 </template>
 
@@ -21,7 +23,19 @@ export default {
         'name': '老王',
         'age': 49,
         'school': 'Tsinghua University'
-      }
+      },
+      now: new Date()
+    }
+  },
+  filters: {
+    formatDate: function (date) {
+      var year = date.getFullYear()
+      var month = date.getMonth() < 10 ? '0' + date.getMonth() : date.getMonth()
+      var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+      var hour = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
+      var minute = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
+      var second = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
+      return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second
     }
   }
 }
