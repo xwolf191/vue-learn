@@ -5,12 +5,16 @@ import App from './App'
 import router from './router'
 import VueResource from 'vue-resource'
 import VeeValidate from 'vee-validate'
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 
 Vue.use(VueResource)
 Vue.use(VeeValidate)
+Vue.use(ElementUI)
 Vue.config.productionTip = false
 Vue.http.options.emulateJSON = true
 
+/* Vue.prototype.BASE_URL='localhost:8090' */
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

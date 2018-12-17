@@ -20,6 +20,9 @@
     "vee-validate": "^2.0.9"
   },
   "devDependencies": {
+    "element-ui": "^2.4.11",
+    "axios": "^0.18.0",
+    "qs": "^6.6.0",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",

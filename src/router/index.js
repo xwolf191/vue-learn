@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Form from '@/components/Form'
 import DefineComponent from '@/components/DefineComponent'
+import Login from '@/components/login/Login'
 
 Vue.use(Router)
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/define',
       name: 'DefineComponent',
       component: DefineComponent
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ]
 })
