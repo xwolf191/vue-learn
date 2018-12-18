@@ -47,9 +47,29 @@ export default {
       Object.keys(obj).forEach(function (key) {
         params.append(key, obj[key])
       })
-      console.info('params= ' + params)
-      API.post('/login', {
-        body: this.user
+      console.info('params= ' + params + ',userObject= ' + this.user)
+      API.post('/login', params, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).then(response => {
+        console.info(response)
+      }).catch(error => {
+        console.error(error)
+      })
+
+      /* form object 提交 */
+      API.post('/login', this.user, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        transformRequest: [function (data) {
+          let ret = ''
+          for (let it in data) {
+            ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
+          }
+          return ret
+        }]
       }).then(response => {
         console.info(response)
       }).catch(error => {
